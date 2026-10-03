@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import DisplayTask from './DisplayTask'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+const App = () => {
+ 
+ const [uname,setUname]=useState('')
+ const [password,setPassword]=useState('')
+ const [submittedName,setSubmittedName]=useState('')
+ const [submittedPassword,setSubmittedPassword]=useState('')
+ 
+  
+    function getTheInputValue(e){
+     e.preventDefault();
+     setSubmittedName(uname)
+     setSubmittedPassword(password)
+  
+    }
+   return (
+    <>
+    <form class="row g-3" onSubmit={getTheInputValue} >
+    <div class="col-md-6">
+    <label class="form-label">UserName</label>
+    <input onChange={(e)=>setUname(e.target.value)} type="text" class="form-control" id="name"/>
     </div>
-  );
+    <div class="col-md-6">
+    <label class="form-label">Password</label>
+    <input onChange={(e)=>{setPassword(e.target.value)}} type="password" class="form-control" id="pass"/>
+    </div>
+    <div class="col-12">
+    <button type="submit" class="btn btn-primary w-50 d-block mx-auto" >Submit</button>
+    </div>
+    </form>
+    <DisplayTask uname={submittedName} password={submittedPassword}/>
+    </>
+  )
+
 }
 
-export default App;
+export default App
